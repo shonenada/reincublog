@@ -1,0 +1,9 @@
+{% load thumbnail %}
+
+<h1>{{ post.title }}</h1>
+{% if post.featured_image %}
+    {% thumbnail post.featured_image "400" as im %}
+        <img src='{{ im.url }}' width='{{ im.width }}' height='{{ im.height }}' alt=''>
+    {% endthumbnail %}
+{% endif %}
+{{ post.content|safe }}

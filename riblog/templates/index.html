@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Reincublog{% endblock %}
+
+{% block content %}
+    <h2><a href='/'>Blog title</a></h2>
+    <hr>
+    {% if posts %}
+        {% for post in posts %}
+            {% include 'post-content.html' %}
+            <p><a href='/post/{{ post.id }}/'>Full post</a></p>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>Sorry - no posts found.</p>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    {% if posts.paginator.num_pages > 1 %}
+        {% if posts.has_next %}
+            <p><a href='?page={{ posts.next_page_number }}'>Older posts &raquo;</a></p>
+        {% endif %}
+        {% if posts.has_previous %}
+            <p><a href='?page={{ posts.previous_page_number }}'>&laquo; Newer posts</a></p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
