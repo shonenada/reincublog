@@ -13,7 +13,7 @@ def single(request, post_id):
             data[direction] = getattr(post, 'get_'+direction+'_by_published_date')()
         except Post.DoesNotExist:
             pass
-    return render_to_response('single_post.html', data)
+    return render_to_response('single_post.html', data, context_instance=RequestContext(request))
 
 
 def index(request):

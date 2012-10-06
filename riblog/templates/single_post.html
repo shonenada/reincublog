@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 
+{% load comments %}
+
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
     {% include 'post-content.html' %}
+    <h2>Comments</h2>
+    {% get_comment_count for post as comment_count %}
+    {% if comment_count > 0 %}
+        {% render_comment_list for post %}
+    {% else %}
+        <p>No comments yet</p>
+    {% endif %}
+    {% render_comment_form for post %}
 {% endblock %}
 
 {% block footer %}
