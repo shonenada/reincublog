@@ -13,6 +13,14 @@ class ViewTest(TestCase):
     def test_index(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
+        # Check first 10 posts are in home page.
+        for test_post in Post.objects.all()[:10]:
+            # Title of post should be in <h1> tags
+            self.assertContains(response, '<h1>'+test_post.title+'</h1>')
+            # Check that the post is linked to...
+            url = '/post/' + str(test_post.id)
+            self.assertContains(response, url)
+        # Assume (naughty) that pagination works because of the lib.
 
 
     def test_single_post(self):
