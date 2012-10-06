@@ -7,6 +7,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    author = models.ForeignKey(User)
     title = models.CharField(max_length=200)
     featured_image = models.ImageField(upload_to='featured', blank=True)
     content = models.TextField()

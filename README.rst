@@ -8,6 +8,9 @@ Posts
 
 Posts have the following fields:
 
+Author
+    A user that is shown as the author.
+
 Title
     Title of the post, used to generate the URL as well as reference the post in the site.
 
