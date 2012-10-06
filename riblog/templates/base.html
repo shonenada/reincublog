@@ -1,0 +1,16 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Reincublog{% endblock %}</title>
+    </head>
+
+    <body>
+        <div class='container'>
+            <div class='row content'>
+                {% block content %}&nbsp;{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
+{% endspaceless %}
