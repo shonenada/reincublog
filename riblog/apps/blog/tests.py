@@ -22,5 +22,9 @@ class ViewTest(TestCase):
         test_post = Post.objects.all()[0]
         url = '/post/' + str(test_post.id)
         response = self.client.get(url, follow=True)
+        # Should be a valid page
         self.assertEqual(response.status_code, 200)
+        # Title of post should be in <h1> tags
         self.assertContains(response, test_post.title)
+        # Post should contain the content
+        self.assertContains(response, test_post.content)
