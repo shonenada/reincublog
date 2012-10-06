@@ -1,0 +1,4 @@
+/env/
+/static/
+*.pyc
+/riblog/local_settings.py
