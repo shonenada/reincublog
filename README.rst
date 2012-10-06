@@ -48,3 +48,16 @@ Expected libraries required will be:
 - Comments https://docs.djangoproject.com/en/1.4/ref/contrib/comments/
 
 ... Plus their dependencies.
+
+Install
+=======
+
+- Clone the repository and ``cd`` into it.
+- Create virtualenv in the ``env`` folder, this should put a python binary at ``env/bin/python``::
+
+    virtualenv --python [your python path]/python env
+
+- Install the required libs with ``pip``, they are in the ``requirements.txt`` file.
+- Make a copy of ``riblog/local_settings.example.py`` to ``riblog/local_settings.py`` and configure for your db.
+- Create the required DB, migrate with south.
+- All tests should run too :D
