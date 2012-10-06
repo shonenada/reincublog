@@ -9,6 +9,12 @@ from .models import Post
 class ViewTest(TestCase):
     fixtures = ['view_test.json']
 
+
+    def test_index(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+
+
     def test_single_post(self):
         # Bad url tests - all prepended with /post when called.
         for url in {
