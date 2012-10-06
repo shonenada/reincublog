@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from .models import Post
@@ -20,12 +21,22 @@ class ViewTest(TestCase):
             self.assertEqual(response.status_code, 404)
 
         # Find a first post and load it.
-        test_post = Post.objects.all()[0]
-        url = '/post/' + str(test_post.id)
-        response = self.client.get(url, follow=True)
-        # Should be a valid page
-        self.assertEqual(response.status_code, 200)
-        # Title of post should be in <h1> tags
-        self.assertContains(response, test_post.title)
-        # Post should contain the content
-        self.assertContains(response, test_post.content)
+        for test_post in Post.objects.all():
+            url = '/post/' + str(test_post.id)
+            response = self.client.get(url, follow=True)
+            # Should be a valid page
+            self.assertEqual(response.status_code, 200)
+            # Title of post should be in <h1> tags
+            self.assertContains(response, '<h1>'+test_post.title+'</h1>')
+            # Post should contain the content
+            self.assertContains(response, test_post.content)
+            # Post should have a featured_image if there is one.
+            if test_post.featured_image:
+                self.assertContains(response, test_post.featured_image.name)
+            # There should be next and previous links if they exist.
+            for direction in ('next', 'previous'):
+                try:
+                    next_prev = getattr(test_post, 'get_'+direction+'_by_published_date')()
+                    self.assertContains(response, reverse('riblog.apps.blog.views.single', args=(next_prev.id,)))
+                except Post.DoesNotExist:
+                    pass
