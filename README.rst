@@ -20,6 +20,9 @@ Featured Image
 Content
     Post content, written in TinyMCE in the Django admin. Accepts external images.
 
+Published Date
+    Date that the post is published and used for ordering in post lists.
+
 Categories
     Each post can be associated with any number of categories and will be shown in the category list.
 

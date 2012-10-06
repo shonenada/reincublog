@@ -11,4 +11,5 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     featured_image = models.ImageField(upload_to='featured', blank=True)
     content = models.TextField()
+    published_date = models.DateTimeField(auto_now_add=True, editable=True)
     categories = models.ManyToManyField(Category)
