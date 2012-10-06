@@ -123,7 +123,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'tinymce',
 
-    'riblog',
+    'riblog.apps.blog',
 )
 
 # A sample logging configuration. The only tangible logging
