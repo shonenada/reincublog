@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from sorl.thumbnail import get_thumbnail
@@ -18,8 +17,7 @@ class ViewTest(TestCase):
             # Title of post should be in <h1> tags
             self.assertContains(response, '<h1>'+test_post.title+'</h1>')
             # Check that the post is linked to...
-            url = '/post/' + str(test_post.id)
-            self.assertContains(response, url)
+            self.assertContains(response, test_post.get_absolute_url())
         # Assume (naughty) that pagination works because of the lib.
 
 
@@ -38,8 +36,7 @@ class ViewTest(TestCase):
 
         # Find a first post and load it.
         for test_post in Post.objects.all():
-            url = '/post/' + str(test_post.id)
-            response = self.client.get(url, follow=True)
+            response = self.client.get(test_post.get_absolute_url(), follow=True)
             # Should be a valid page
             self.assertEqual(response.status_code, 200)
             # Title of post should be in <h1> tags
@@ -54,6 +51,6 @@ class ViewTest(TestCase):
             for direction in ('next', 'previous'):
                 try:
                     next_prev = getattr(test_post, 'get_'+direction+'_by_published_date')()
-                    self.assertContains(response, reverse('riblog.apps.blog.views.single', args=(next_prev.id,)))
+                    self.assertContains(response, next_prev.get_absolute_url())
                 except Post.DoesNotExist:
                     pass
