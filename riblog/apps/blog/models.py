@@ -17,3 +17,9 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-published_date',)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('post_url', (), {
+            'post_id': self.id,
+            })

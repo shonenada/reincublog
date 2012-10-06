@@ -1,16 +1,25 @@
 from django.conf.urls import patterns, include, url
-
-# Uncomment the next two lines to enable the admin:
+from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from django.contrib import admin
 admin.autodiscover()
 
+from apps.blog.models import Post
+
+
+info_dict = {
+    'queryset': Post.objects.all(),
+    'date_field': 'published_date',
+}
+
+
+sitemaps = {
+    'blog': GenericSitemap(info_dict, priority=1),
+}
+
+
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'riblog.views.home', name='home'),
-    # url(r'^riblog/', include('riblog.foo.urls')),
     url(r'^$', 'riblog.apps.blog.views.index'),
     url(r'^post/', include('riblog.apps.blog.urls')),
-
-    # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
