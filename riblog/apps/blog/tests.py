@@ -37,6 +37,7 @@ class ViewTest(TestCase):
             for direction in ('next', 'previous'):
                 try:
                     next_prev = getattr(test_post, 'get_'+direction+'_by_published_date')()
+                    print test_post, direction
                     self.assertContains(response, reverse('riblog.apps.blog.views.single', args=(next_prev.id,)))
                 except Post.DoesNotExist:
                     pass

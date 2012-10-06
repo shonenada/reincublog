@@ -5,4 +5,10 @@ from .models import Post
 
 def single(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    return render_to_response('single_post.html', {'post': post})
+    data = {'post': post}
+    for direction in ('next', 'previous'):
+        try:
+            data[direction] = getattr(post, 'get_'+direction+'_by_published_date')()
+        except Post.DoesNotExist:
+            pass
+    return render_to_response('single_post.html', data)

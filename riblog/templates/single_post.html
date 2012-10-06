@@ -6,3 +6,12 @@
     <h1>{{ post.title }}</h1>
     {{ post.content|safe }}
 {% endblock %}
+
+{% block footer %}
+    {% if previous %}
+        <p><a href='/post/{{ previous.id }}/'>Older post &raquo;</a></p>
+    {% endif %}
+    {% if next %}
+        <p><a href='/post/{{ next.id }}/'>&laquo; Newer post</a></p>
+    {% endif %}
+{% endblock %}
