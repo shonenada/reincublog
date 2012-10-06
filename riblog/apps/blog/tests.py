@@ -23,3 +23,4 @@ class ViewTest(TestCase):
         url = '/post/' + str(test_post.id)
         response = self.client.get(url, follow=True)
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, test_post.title)

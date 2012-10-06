@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'riblog.views.home', name='home'),
     # url(r'^riblog/', include('riblog.foo.urls')),
+    url(r'^post/', include('riblog.apps.blog.urls')),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
