@@ -14,6 +14,7 @@ class ViewTest(TestCase):
                 '0/',
                 '-1/',
                 'post/1/',
+                '1a/',
                 }:
             response = self.client.get('/post/'+url, follow=True)
             self.assertEqual(response.status_code, 404)
