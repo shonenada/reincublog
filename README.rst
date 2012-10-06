@@ -40,4 +40,11 @@ There are three standard views to the blog:
 Libraries
 =========
 
-Expected libraries required will be Sorl & TinyMCE, plus their dependencies.
+Expected libraries required will be:
+
+- Sorl
+- TinyMCE
+- Plus sitemaps https://docs.djangoproject.com/en/1.4/ref/contrib/sitemaps/
+- Comments https://docs.djangoproject.com/en/1.4/ref/contrib/comments/
+
+... Plus their dependencies.
