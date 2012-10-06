@@ -1,6 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+from sorl.thumbnail import get_thumbnail
+
 from .models import Post
 
 
@@ -32,12 +34,12 @@ class ViewTest(TestCase):
             self.assertContains(response, test_post.content)
             # Post should have a featured_image if there is one.
             if test_post.featured_image:
-                self.assertContains(response, test_post.featured_image.name)
+                thumb = get_thumbnail(test_post.featured_image, '400')
+                self.assertContains(response, thumb.name)
             # There should be next and previous links if they exist.
             for direction in ('next', 'previous'):
                 try:
                     next_prev = getattr(test_post, 'get_'+direction+'_by_published_date')()
-                    print test_post, direction
                     self.assertContains(response, reverse('riblog.apps.blog.views.single', args=(next_prev.id,)))
                 except Post.DoesNotExist:
                     pass
