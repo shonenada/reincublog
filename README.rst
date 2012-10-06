@@ -23,25 +23,14 @@ Content
 Published Date
     Date that the post is published and used for ordering in post lists.
 
-Categories
-    Each post can be associated with any number of categories and will be shown in the category list.
-
-Categories
-----------
-
-Name
-    The name of the category.
-
 Views
 -----
 
-There are three standard views to the blog:
+There are two standard views to the blog:
 
 - Index. The paginated, reverse chronologically ordered list of posts. Shows the post title, featured image and full text.
 
 - Single post. The view for a single blog post shows the post itself with links to next and previous posts (if available) and links to category pages.
-
-- Category list. For each category, a list of the posts in that category shown with title and featured image. List is reverse chronologically ordered and paginated.
 
 Libraries
 =========

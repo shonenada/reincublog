@@ -5,24 +5,12 @@ from django.utils import timezone
 from tinymce import models as tinymce_models
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=200)
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        ordering = ('name',)
-        verbose_name_plural = 'Categories'
-
-
 class Post(models.Model):
     author = models.ForeignKey(User)
     title = models.CharField(max_length=200)
     featured_image = models.ImageField(upload_to='featured', blank=True)
     content = tinymce_models.HTMLField()
     published_date = models.DateTimeField(default=timezone.now(), editable=True)
-    categories = models.ManyToManyField(Category, blank=True)
 
     def __unicode__(self):
         return self.title
