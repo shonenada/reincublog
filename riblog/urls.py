@@ -18,7 +18,7 @@ sitemaps = {
 
 
 urlpatterns = patterns('',
-    url(r'^$', 'riblog.apps.blog.views.index'),
+    url(r'^$|^page/(?P<page_num>\d+)/$', 'riblog.apps.blog.views.index'),
     url(r'^post/', include('riblog.apps.blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),

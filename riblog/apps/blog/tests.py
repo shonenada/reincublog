@@ -18,7 +18,23 @@ class ViewTest(TestCase):
             self.assertContains(response, '<h1>'+test_post.title+'</h1>')
             # Check that the post is linked to...
             self.assertContains(response, test_post.get_absolute_url())
-        # Assume (naughty) that pagination works because of the lib.
+
+
+    def test_index_pages(self):
+        # Page 0 is 404
+        response = self.client.get('/page/0/')
+        self.assertEqual(response.status_code, 404)
+        # Page 1 redirects to root
+        response = self.client.get('/page/1/')
+        self.assertRedirects(response, '/')
+        # Page 2 works - if there are posts. Iterate and test them.
+        num_pages = Post.objects.count() / 10 + 1
+        for page in range(2, num_pages + 1):
+            response = self.client.get('/page/'+str(page)+'/')
+            self.assertEqual(response.status_code, 200)
+        # Get one more page than exists... should be 404.
+        response = self.client.get('/page/'+str(num_pages + 1)+'/')
+        self.assertEqual(response.status_code, 404)
 
 
     def test_single_post(self):
